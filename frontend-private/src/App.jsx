@@ -11,7 +11,7 @@ function App() {
 
   const fetchIncidentes = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/incidentes');
+      const response = await fetch('/api/incidentes');
       const data = await response.json();
       if (data.status === 'success' && Array.isArray(data.data)) {
         setIncidentes([...data.data].reverse());
@@ -29,7 +29,7 @@ function App() {
     const estadoToUpdate = nuevosEstados[id];
     if (!estadoToUpdate) return;
     try {
-      await fetch(`http://localhost:5000/api/incidentes/${id}/estado`, {
+      await fetch(`/api/incidentes/${id}/estado`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ estado: estadoToUpdate })
@@ -147,7 +147,6 @@ function App() {
         </thead>
         <tbody>
           {incidentes.map(inc => {
-            // ¡EL BLINDAJE ANTI-CRASHES AQUÍ!
             const safeId = inc?._id ? String(inc._id).substring(0,8) : 'N/A';
             const safeSeveridad = inc?.severidad ? String(inc.severidad).toLowerCase() : 'media';
             const displaySeveridad = inc?.severidad ? String(inc.severidad).toUpperCase() : 'DESCONOCIDA';
@@ -177,7 +176,6 @@ function App() {
 
   return (
     <div className="layout">
-      {/* SIDEBAR EXACTO A LA IMAGEN */}
       <aside className="sidebar">
         <div className="sidebar-title">IronWall SOC</div>
         

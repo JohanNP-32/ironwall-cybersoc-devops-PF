@@ -24,7 +24,7 @@ function App() {
     setTicketGenerado(null);
     
     try {
-      const response = await fetch('http://localhost:5000/api/incidentes/reportar', {
+      const response = await fetch('/api/incidentes/reportar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ entidad, tipo, severidad, descripcion, fecha: new Date().toLocaleString() })
@@ -48,7 +48,7 @@ function App() {
     e.preventDefault();
     setTrackError(''); setTrackResult(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/incidentes/${searchId}`);
+      const response = await fetch(`/api/incidentes/${searchId}`);
       const data = await response.json();
       if (data.status === 'success') {
         setTrackResult(data.data);
